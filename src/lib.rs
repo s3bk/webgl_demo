@@ -1,6 +1,8 @@
 use wasm_bindgen::prelude::*;
 use usvg::{Tree, Options};
 use pathfinder_svg::BuiltSVG;
+use pathfinder_view::{WasmView, Config, Interactive};
+use web_sys::HtmlCanvasElement;
 
 #[wasm_bindgen(start)]
 pub fn run() {
@@ -9,13 +11,14 @@ pub fn run() {
 }
 
 #[wasm_bindgen]
-pub fn draw(svg: &[u8]) {
+pub fn view(canvas: HtmlCanvasElement, svg: &[u8]) -> WasmView {
     let tree = Tree::from_data(svg, &Options::default()).unwrap();
-    let scene = BuiltSVG::from_tree(tree).scene;
+    let scene = BuiltSVG::from_tree(&tree).scene;
 
-    pathfinder_view::show(scene, pathfinder_view::Config {
+    let config = Config {
         zoom: false,
         pan: false
-    });
+    };
+    WasmView::new(canvas, config, Box::new(scene) as Box<dyn Interactive>)
 }
 

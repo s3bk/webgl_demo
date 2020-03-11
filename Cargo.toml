@@ -15,3 +15,4 @@ console_error_panic_hook = "*"
 usvg = { version = "0.9", default-features = false }
 pathfinder_view = { git = "https://github.com/s3bk/pathfinder_view" }
 pathfinder_svg = { git = "https://github.com/s3bk/pathfinder" }
+web-sys = { version = "*", features = ["HtmlCanvasElement"]}
