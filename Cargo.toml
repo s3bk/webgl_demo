@@ -16,3 +16,14 @@ usvg = { version = "0.9", default-features = false }
 pathfinder_view = { git = "https://github.com/s3bk/pathfinder_view" }
 pathfinder_svg = { git = "https://github.com/s3bk/pathfinder" }
 web-sys = { version = "*", features = ["HtmlCanvasElement"]}
+
+[patch."https://github.com/s3bk/pathfinder"]
+pathfinder_gl = { path = "../pathfinder/gl" }
+pathfinder_simd = { path = "../pathfinder/simd" }
+pathfinder_webgl = { path = "../pathfinder/webgl" }
+pathfinder_renderer = { path = "../pathfinder/renderer" }
+pathfinder_gpu = { path = "../pathfinder/gpu" }
+pathfinder_content = { path = "../pathfinder/content" }
+pathfinder_geometry = { path = "../pathfinder/geometry" }
+pathfinder_resources = { path = "../pathfinder/resources" }
+pathfinder_color = { path = "../pathfinder/color" }
