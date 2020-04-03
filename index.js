@@ -6,7 +6,7 @@ wasm_bindgen("pkg/webgl_bg.wasm").catch(console.error)
 function show_logo() {
     fetch("Ghostscript_Tiger.svg")
     .then(r => r.arrayBuffer())
-    .then(buf => show_data(new Uint8Array(buf)));
+    .then(buf => init_view(new Uint8Array(buf)));
 }
 
 function set_scroll_factors() {}
@@ -19,11 +19,6 @@ function drop_handler(e) {
 function dragover_handler(e) {
     e.stopPropagation();
     e.preventDefault();
-}
-
-function display(msg) {
-    delete document.getElementById("drop").style.display;
-    document.getElementById("msg").innerText = msg;
 }
 
 let view;
@@ -52,21 +47,12 @@ function init_view(data) {
     view.render();
 }
 
-function show_data(data) {
-    try {
-        init_view(data);
-        document.getElementById("drop").style.display = "none";
-    } catch (e) {
-        display("oops. try another one.");
-        display(e);
-    }
-}
 
 function show(file) {
     let reader = new FileReader();
     reader.onload = function() {
         let data = new Uint8Array(reader.result);
-        show_data(data);
+        init_view(data);
 
     };
     reader.readAsArrayBuffer(file);
